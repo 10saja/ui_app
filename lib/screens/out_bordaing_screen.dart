@@ -94,7 +94,10 @@ class _OutBordaingScreenState extends State<OutBordaingScreen> {
                 _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.ease);
               }, icon: const Icon(Icons.arrow_forward_ios_sharp),color: _currentPage==2?Colors.grey:Colors.black,),
             ],
-          )
+          ),
+          ElevatedButton(onPressed: (){
+            Navigator.pushReplacementNamed(context, '/login_screen');
+          }, child: Text('START'))
         ],
       ),
     );
