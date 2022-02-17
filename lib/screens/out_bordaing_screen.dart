@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:ui_app/widgets/OutBordingIndicator.dart';
 import 'package:ui_app/widgets/OutBordingWidget.dart';
 class OutBordaingScreen extends StatefulWidget {
   const OutBordaingScreen({Key? key}) : super(key: key);
@@ -37,15 +38,15 @@ class _OutBordaingScreenState extends State<OutBordaingScreen> {
         children: [
           Align(
             alignment: AlignmentDirectional.topEnd,
-            child: Visibility(
-              visible: _currentPage!=2,
-              replacement: TextButton(onPressed: (){},child: Text('START'),),
-              child: TextButton(onPressed: (){
-                _pageController.animateToPage(2, duration: Duration(seconds: 2), curve: Curves.easeInBack);
-              }, child: Padding(
-                padding: const EdgeInsets.all(15.8),
-                child: Text('SKIP'),
-              )),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Visibility(
+                visible: _currentPage!=2,
+                replacement: TextButton(onPressed: (){},child: const Text('START'),),
+                child: TextButton(onPressed: (){
+                  _pageController.animateToPage(2, duration: const Duration(seconds: 2), curve: Curves.easeInBack);
+                }, child: const Text('SKIP')),
+              ),
             ),
           )
           ,Expanded(
@@ -69,14 +70,31 @@ class _OutBordaingScreenState extends State<OutBordaingScreen> {
             ),
           ),
           Row(
-           mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TabPageSelectorIndicator(backgroundColor:_currentPage==0? Colors.blue:Colors.grey, borderColor: Colors.blue, size: 12),
-              TabPageSelectorIndicator(backgroundColor: _currentPage==1? Colors.blue:Colors.grey, borderColor: Colors.blue, size: 12),
-              TabPageSelectorIndicator(backgroundColor:_currentPage==2? Colors.blue:Colors.grey, borderColor: Colors.blue, size: 12)
+              OutBordingIndicator(marginEnd: 5,selected: _currentPage==0,),
+              OutBordingIndicator(marginEnd: 5,selected:  _currentPage==1,)
+              ,OutBordingIndicator(marginEnd: 5, selected: _currentPage==2,)
+            ],
+          ),
+          const SizedBox(height: 30,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Visibility(
+                visible: _currentPage!=0,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: IconButton(onPressed: (){
+                   _pageController.previousPage(duration: const Duration(seconds: 1), curve: Curves.ease);
+                }, icon: const Icon(Icons.arrow_back_ios_sharp)),
+              ),
+              IconButton(onPressed: (){
+                _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.ease);
+              }, icon: const Icon(Icons.arrow_forward_ios_sharp),color: _currentPage==2?Colors.grey:Colors.black,),
             ],
           )
-          ,SizedBox(height: 30,)
         ],
       ),
     );
@@ -84,3 +102,12 @@ class _OutBordaingScreenState extends State<OutBordaingScreen> {
 }
 
 
+
+/*Row(
+           mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TabPageSelectorIndicator(backgroundColor:_currentPage==0? Colors.blue:Colors.grey, borderColor: Colors.grey, size: 12),
+              TabPageSelectorIndicator(backgroundColor: _currentPage==1? Colors.blue:Colors.grey, borderColor: Colors.grey, size: 12),
+              TabPageSelectorIndicator(backgroundColor:_currentPage==2? Colors.blue:Colors.grey, borderColor: Colors.grey, size: 12)
+            ],
+         ) */
