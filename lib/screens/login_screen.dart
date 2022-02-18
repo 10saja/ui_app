@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -21,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
         centerTitle: true,
       ),
      body: Padding(
-       padding: const EdgeInsets.all(8.0),
+       padding: const EdgeInsetsDirectional.only(start: 20,end:20),
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children: const [
@@ -40,9 +41,37 @@ class _LoginScreenState extends State<LoginScreen> {
            TextField(
              keyboardType: TextInputType.emailAddress,
              enabled: true,
-             obscureText: true,
-             obscuringCharacter: '*'
-                 '',
+             //obscureText: true,
+             obscuringCharacter: '*',
+             textDirection: TextDirection.ltr,
+             decoration: InputDecoration(
+               //labelText: 'Email',
+               floatingLabelBehavior: FloatingLabelBehavior.auto,
+               helperText: 'example@gmail.com',
+               helperStyle: TextStyle(fontSize: 15),
+               prefixIcon:Icon(Icons.email) ,
+               //prefixText: 'email',
+               //suffixIcon: Icon(Icons.email),
+              // suffixText: 'com',
+               hintText: 'Email',
+               hintMaxLines: 1,
+               hintStyle: TextStyle(fontSize: 20),
+               filled: true,
+               fillColor: Color(0xffD2CECEFF),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8))
+              )
+              // enabledBorder: InputBorder.none,
+               /*enabledBorder: UnderlineInputBorder(
+                 borderSide: BorderSide(
+                   color: Colors.red
+                 )
+               )*/
+                
+             ),
              /*cursorColor: Colors.red,
              cursorHeight: 5,
              cursorRadius: Radius.circular(2)*/
